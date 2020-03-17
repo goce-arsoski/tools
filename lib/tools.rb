@@ -40,18 +40,12 @@ module Tools
       else
         return false
       end
-
     end
 
     private
+
     def sum
-      @double_every_second_array.map do |num|
-        @sum += num
-      end
-      @every_second_array_2.map do |num|
-        @sum += num
-      end
-      return @sum
+      @sum = @double_every_second_array.sum + @every_second_array_2.sum
     end
   end
 end
