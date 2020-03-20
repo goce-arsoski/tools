@@ -2,22 +2,24 @@ require "tools/version"
 
 module Tools
   class Luhn
+    LOWERCASE = ('a'..'z')
+    UPPERCASE = ('A'..'Z')
+
     def initialize(str)
       @str = str
-      #@sum = arrays_sum
       @double_every_second_array = []
       @every_second_array_2 = []
     end
 
     def valid?
-      @stripped = @str.delete(' ')
-      return false if @stripped.length <= 1
+      return false if @str.each_char.any?{ |char| LOWERCASE.cover?(char) || UPPERCASE.cover?(char) } # checking for letters in the string
 
-      return false if @stripped.match(/["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]/)
+      !@str[/\W/].nil? # checking for special characters in the string
 
-      return false if @stripped.match(/["!", "\"", "#", "$", "£", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "{", "|", "}", "~"]/)
+      @stripped = @str.delete(' ') # delete empty spaces from string
+      return false if @stripped.length <= 1 # checking for string length
 
-      (arrays_sum % 10).zero? ? true : false
+      (arrays_sum % 10).zero? ? true : false # checking validity for a card
     end
 
     private
@@ -25,7 +27,7 @@ module Tools
     def every_second_array
       @reversed_strip = @stripped.reverse
       @reversed_array = @reversed_strip.chars   # we can do this with split('')
-      every_second_range = (1..@reversed_array.length-1).step(2)
+      every_second_range = (1..@reversed_array.length - 1).step(2)
       every_second_array = every_second_range.map { |i| @reversed_array[i] }
       every_second_array.map do |num|
         a = num.to_i * 2
@@ -37,7 +39,7 @@ module Tools
     end
 
     def every_second_array_2
-      every_second_range_2 = (0..@reversed_array.length-1).step(2)
+      every_second_range_2 = (0..@reversed_array.length - 1).step(2)
       every_second_array_2 = every_second_range_2.map { |i| @reversed_array[i] }
       every_second_array_2.map do |num|
         a = num.to_i
