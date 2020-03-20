@@ -4,7 +4,7 @@ module Tools
   class Luhn
     def initialize(str)
       @str = str
-      @sum = 0
+      #@sum = arrays_sum
       @double_every_second_array = []
       @every_second_array_2 = []
     end
@@ -17,23 +17,23 @@ module Tools
 
       return false if @stripped.match(/["!", "\"", "#", "$", "£", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "{", "|", "}", "~"]/)
 
-      sum % 10 == 0? true : false
+      (arrays_sum % 10).zero? ? true : false
     end
 
     private
 
     def every_second_array
       @reversed_strip = @stripped.reverse
-      @reversed_array = @reversed_strip.chars   # moze i so split('')
+      @reversed_array = @reversed_strip.chars   # we can do this with split('')
       every_second_range = (1..@reversed_array.length-1).step(2)
       every_second_array = every_second_range.map { |i| @reversed_array[i] }
       every_second_array.map do |num|
-        a = num.to_i*2
+        a = num.to_i * 2
         a -= 9 if a >= 10
-
         @double_every_second_array << a
       end
-      return @double_every_second_array
+
+      @double_every_second_array
     end
 
     def every_second_array_2
@@ -43,49 +43,43 @@ module Tools
         a = num.to_i
         @every_second_array_2 << a
       end
-      return @every_second_array_2
+
+      @every_second_array_2
     end
 
-    def sum
-      @sum = every_second_array.sum + every_second_array_2.sum
+    def arrays_sum
+      every_second_array.sum + every_second_array_2.sum
     end
   end
 
   class Raindrops
     def initialize(num)
       @num = num
-      @aux1 = ''
+      @factors = calculate_factors
     end
 
-    def check
-      factor
-      raindrop_speak
-    end
+    def calculate_factors
+      results = []
 
-    def factor
-      num = @num
-      i = 1
-      @aux = []
-      while i <= num
-        @aux << i if (num % i).zero?
-
-        i += 1
+      (1..@num).to_a.each do |elem|
+        results << elem if (@num % elem).zero?
       end
-      puts "#{@num}'s factors are: #{@aux.join(", ")}"
+
+      results
     end
 
     def raindrop_speak
-      aux = @aux
-      num = @num.to_s
-      aux.each do |i|
-        @aux1 += 'Pling' if i == 3
+      result = ''
 
-        @aux1 += 'Plang' if i == 5
+      @factors.each do |i|
+        result += 'Pling' if i == 3
 
-        @aux1 += 'Plong' if i == 7
+        result += 'Plang' if i == 5
+
+        result += 'Plong' if i == 7
       end
-      @aux1 != ''? @aux1 : @aux1 = num
-      return @aux1
+
+      result != '' ? result : @num.to_s
     end
   end
 end
