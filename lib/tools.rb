@@ -14,7 +14,7 @@ module Tools
     def valid?
       return false if @str.each_char.any?{ |char| LOWERCASE.cover?(char) || UPPERCASE.cover?(char) } # checking for letters in the string
 
-      !@str[/\W/].nil? # checking for special characters in the string
+      @str[/\W/].nil? # checking for special characters in the string
 
       @stripped = @str.delete(' ') # delete empty spaces from string
       return false if @stripped.length <= 1 # checking for string length
