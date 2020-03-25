@@ -23,7 +23,7 @@ module Tools
     def checksum
       every_second_digit_from_right.map do |num|
         double = num * 2
-        double >= 10 ? double -= 9 : double
+        double >= 10 ? double - 9 : double
       end
     end
 
