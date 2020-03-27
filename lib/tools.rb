@@ -74,4 +74,57 @@ module Tools
       result != '' ? result : @num.to_s
     end
   end
+
+  class Allergies
+    ALLERGENS = {
+      1 => 'eggs',
+      2 => 'peanuts',
+      4 => 'shellfish',
+      8 => 'strawberries',
+      16 => 'tomatoes',
+      32 => 'chocolate',
+      64 => 'pollen',
+      128 => 'cats'
+    }
+
+    def initialize(score)
+      @score = score
+    end
+
+    def overscore
+      score = @score
+      return false if score % 256 == 0
+
+      score -= 256 while score > 256
+      score
+    end
+
+    def allergic_to?(allergen)
+      overscore
+      return false if overscore == false
+
+      allergic_list = calculation.reverse.map { |num| ALLERGENS[num] }
+      allergic_list.include? allergen
+    end
+
+    def allergies_list
+      allergies = []
+      ALLERGENS.each do |key, _|
+        allergies << key if @score >= key
+      end
+      allergies
+    end
+
+    def calculation
+      list = []
+      score = @score
+      allergies_list.reverse.each do |num|
+        if score >= num
+          score -= num
+          list << num
+        end
+      end
+      list
+    end
+  end
 end
