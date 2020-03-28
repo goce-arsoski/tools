@@ -91,6 +91,13 @@ module Tools
       @score = score
     end
 
+    def allergic_to?(allergen)
+      overscore
+
+      allergic_list = calculation.reverse.map { |num| ALLERGENS[num] }
+      allergic_list.include? allergen
+    end
+
     def overscore
       score = @score
       return false if score % 256 == 0
@@ -99,12 +106,7 @@ module Tools
       score
     end
 
-    def allergic_to?(allergen)
-      overscore
-
-      allergic_list = calculation.reverse.map { |num| ALLERGENS[num] }
-      allergic_list.include? allergen
-    end
+    private
 
     def allergies_list
       allergies = []
