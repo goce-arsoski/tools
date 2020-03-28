@@ -101,7 +101,6 @@ module Tools
 
     def allergic_to?(allergen)
       overscore
-      return false if overscore == false
 
       allergic_list = calculation.reverse.map { |num| ALLERGENS[num] }
       allergic_list.include? allergen
