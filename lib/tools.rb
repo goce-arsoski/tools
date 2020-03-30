@@ -76,6 +76,7 @@ module Tools
   end
 
   class Allergies
+    LIMIT =256
     ALLERGENS = {
       1 => 'eggs',
       2 => 'peanuts',
@@ -92,40 +93,67 @@ module Tools
     end
 
     def allergic_to?(allergen)
-      overscore
-
-      allergic_list = calculation.reverse.map { |num| ALLERGENS[num] }
-      allergic_list.include? allergen
+      score_allergens.include?(allergen)
     end
 
-    def overscore
-      score = @score
-      return false if score % 256 == 0
-
-      score -= 256 while score > 256
-      score
+    def score_allergens
+      allergen_keys.map { |key| ALLERGENS[key] }
     end
 
-    private
+     private
 
-    def allergies_list
-      allergies = []
-      ALLERGENS.each do |key, _|
-        allergies << key if @score >= key
+    def score
+      @score -= LIMIT while @score >= LIMIT
+      @score
+    end
+
+    def keys
+      ALLERGENS.keys.select { |key| key <= score }.sort.reverse
+    end
+
+    def allergen_keys
+      sc = score
+      keys.select { |elem| sc >= elem && sc -= elem }
+    end
+  end
+
+  class Resistor
+    COLORS_RESISTANCE = %w[black brown red orange yellow green blue violet gray white]
+    COLORS_TOLERANCE = {
+      'gray' => 0.05,
+      'violet' => 0.1,
+      'blue' => 0.25,
+      'green' => 0.5,
+      'brown' => 1,
+      'red' => 2,
+      'gold' => 5,
+      'silver' => 10,
+      '' => 20
+    }
+
+    def initialize(resistor)
+      @resistor = resistor
+    end
+
+    def info
+      "#{resistance} ohms +/-#{tolerance}%"
+    end
+
+    def resistance
+      (colors_resistance(@resistor[0]) * 10 + colors_resistance(@resistor[1])) * 10**colors_resistance(@resistor[2])
+    end
+
+    def colors_resistance(color)
+      COLORS_RESISTANCE.each_with_index do |num, idx|
+        return idx if num == color
       end
-      allergies
     end
 
-    def calculation
-      list = []
-      score = @score
-      allergies_list.reverse.each do |num|
-        if score >= num
-          score -= num
-          list << num
-        end
+    def tolerance
+      COLORS_TOLERANCE.each do |key, value|
+        return COLORS_TOLERANCE[''] if @resistor[3].nil?
+        return value if key == @resistor[3]
       end
-      list
     end
   end
 end
