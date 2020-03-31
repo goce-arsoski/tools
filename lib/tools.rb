@@ -140,13 +140,18 @@ module Tools
     end
 
     def resistance
-      (colors_resistance(@resistor[0]) * 10 + colors_resistance(@resistor[1])) * 10**colors_resistance(@resistor[2])
+      (colors_resistance(@resistor[0]) * 10 + colors_resistance(@resistor[1])) * power_of_10
     end
 
     def colors_resistance(color)
       COLORS_RESISTANCE.each_with_index do |num, idx|
         return idx if num == color
       end
+    end
+
+    def power_of_10
+      @resistor[2] = COLORS_RESISTANCE[0] if @resistor[2] == nil
+      10**colors_resistance(@resistor[2])
     end
 
     def tolerance
