@@ -117,48 +117,87 @@ module Tools
     end
   end
 
-  class Resistor
-    COLORS_RESISTANCE = %w[black brown red orange yellow green blue violet gray white]
-    COLORS_TOLERANCE = {
-      'gray' => 0.05,
-      'violet' => 0.1,
-      'blue' => 0.25,
-      'green' => 0.5,
-      'brown' => 1,
-      'red' => 2,
-      'gold' => 5,
-      'silver' => 10,
-      '' => 20
+  class Resistors
+    COLORS = {
+      black: {
+        value: 0,
+        multiplier: 10**0,
+        tolerance: 20
+      },
+      brown: {
+        value: 1,
+        multiplier: 10**1,
+        tolerance: 1
+      },
+      red: {
+        value: 2,
+        multiplier: 10**2,
+        tolerance: 2
+      },
+      orange: {
+        value: 3,
+        multiplier: 10**3
+      },
+      yellow: {
+        value: 4,
+        multiplier: 10**4
+      },
+      green: {
+        value: 5,
+        multiplier: 10**5,
+        tolerance: 0.5
+      },
+      blue: {
+        value: 6,
+        multiplier: 10**6,
+        tolerance: 0.25
+      },
+      violet: {
+        value: 7,
+        multiplier: 10**7,
+        tolerance: 0.1
+      },
+      gray: {
+        value: 8,
+        multiplier: 10**8,
+        tolerance: 0.05
+      },
+      white: {
+        value: 9,
+        multiplier: 10**9
+      },
+      gold: {
+        multiplier: 10**-1,
+        tolerance: 5
+      },
+      silver: {
+        multiplier: 10**-2,
+        tolerance: 10
+      }
     }
 
     def initialize(resistor)
-      @resistor = resistor
+      @first_digit, @second_digit, @multiplier, @tolerance = resistor
     end
 
-    def info
-      "#{resistance} ohms +/-#{tolerance}%"
+    def specification
+      "#{resistance} ohms +/- #{tolerance}%"
     end
 
     def resistance
-      (colors_resistance(@resistor[0]) * 10 + colors_resistance(@resistor[1])) * power_of_10
+      (first_second(@first_digit) * 10 + first_second(@second_digit)) * multiplier
     end
 
-    def colors_resistance(color)
-      COLORS_RESISTANCE.each_with_index do |num, idx|
-        return idx if num == color
-      end
+    def first_second(color)
+      COLORS[color.downcase.to_sym][:value]
     end
 
-    def power_of_10
-      @resistor[2] = COLORS_RESISTANCE[0] if @resistor[2] == nil
-      10**colors_resistance(@resistor[2])
+    def multiplier
+      @multiplier.nil? ? @multiplier = 1 : COLORS[@multiplier.downcase.to_sym][:multiplier]
     end
 
     def tolerance
-      COLORS_TOLERANCE.each do |key, value|
-        return COLORS_TOLERANCE[''] if @resistor[3].nil?
-        return value if key == @resistor[3]
-      end
+      @tolerance.nil? ? @tolerance = 20 : COLORS[@tolerance.downcase.to_sym][:tolerance]
     end
   end
 end
