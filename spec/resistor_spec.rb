@@ -16,26 +16,7 @@ RSpec.describe Tools::Resistors do
     expect(rs.specification).to eq expected
   end
 
-  it 'without tolerance has +/- 20% tolerance' do
-    rs = Tools::Resistors.new(['red', 'violet', 'green'])
-    expected = "2700000 ohms +/- 20%"
-
-    expect(rs.specification).to eq expected
-  end
-
-
-
-  it 'has +/- 5 % tolerance' do
-    rs = Tools::Resistors.new(['red', 'black', 'green', 'gold'])
-    expect(rs.tolerance).to eq(5)
-  end
-
-  it 'has +/- 20 % tolerance' do
-    rs = Tools::Resistors.new(['red', 'black', 'green'])
-    expect(rs.tolerance).to eq(20)
-  end
-
-  it 'has 12000 ohms and +/- 20% tolerance' do
+  it 'has 12000 ohms and +/- 20% tolerance without tolerance' do
     rs = Tools::Resistors.new(['brown', 'red', 'orange'])
     expected = "12000 ohms +/- 20%"
 
