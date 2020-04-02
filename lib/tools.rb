@@ -188,6 +188,8 @@ module Tools
       (first_second(@first_digit) * 10 + first_second(@second_digit)) * multiplier
     end
 
+    private
+
     def first_second(color)
       COLORS[color.downcase.to_sym][:value]
     end
