@@ -240,21 +240,15 @@ module Tools
     def division_by_two
       return @antipodes if @antipodes.length < 2
 
-      calculation.map { |i| i / 2.0 }
+      return [left.sum / 2.0 + right.sum / 2.0] if @antipodes.length < 4
+
+      [sum[0].sum / 2.0, sum[1].sum / 2.0]
     end
 
     private
 
-    def calculation
-      n = sum.length / 2
-      i = 0
-      calculation = []
-      calculation << sum[i] + sum[n + i] && i += 1 while i < n
-      calculation
-    end
-
     def sum
-      left + right
+      [left, right].transpose
     end
 
     def left
