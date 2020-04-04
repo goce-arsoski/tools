@@ -202,4 +202,37 @@ module Tools
       @tolerance.nil? ? @tolerance = 20 : COLORS[@tolerance.downcase.to_sym][:tolerance]
     end
   end
+
+  class Antipodes
+    def initialize(antipodes)
+      @antipodes = antipodes
+      @half = @antipodes.length / 2
+  
+    end
+  
+    def division_by_two
+      return @antipodes if @antipodes.length < 2
+      calculation.map { |i| i / 2.0 }
+    end
+  
+    def calculation
+      n = sum.length / 2
+      i = 0
+      calculation = []
+      calculation << sum[i] + sum[n + i] && i += 1 while i < n
+      calculation
+    end
+  
+    def sum
+      left + right
+    end
+  
+    def left
+      @antipodes.first(@half)
+    end
+  
+    def right
+      @antipodes.last(@half).reverse
+    end
+  end
 end
