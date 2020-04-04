@@ -207,14 +207,14 @@ module Tools
     def initialize(antipodes)
       @antipodes = antipodes
       @half = @antipodes.length / 2
-  
     end
-  
+
     def division_by_two
       return @antipodes if @antipodes.length < 2
+      
       calculation.map { |i| i / 2.0 }
     end
-  
+
     def calculation
       n = sum.length / 2
       i = 0
@@ -222,15 +222,15 @@ module Tools
       calculation << sum[i] + sum[n + i] && i += 1 while i < n
       calculation
     end
-  
+
     def sum
       left + right
     end
-  
+
     def left
       @antipodes.first(@half)
     end
-  
+
     def right
       @antipodes.last(@half).reverse
     end
