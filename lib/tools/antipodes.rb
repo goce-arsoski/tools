@@ -6,18 +6,10 @@ module Tools
     end
 
     def division_by_two
-      return @antipodes if @antipodes.length < 2
-
-      return [left.sum / 2.0 + right.sum / 2.0] if @antipodes.length < 4
-
-      [sum[0].sum / 2.0, sum[1].sum / 2.0]
+      (0..@half - 1).map { |i| (left[i] + right[i]) / 2.0 }
     end
 
     private
-
-    def sum
-      [left, right].transpose
-    end
 
     def left
       @antipodes.first(@half)

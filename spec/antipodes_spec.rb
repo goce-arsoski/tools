@@ -18,4 +18,9 @@ RSpec.describe Tools::Antipodes do
     antipodes = Tools::Antipodes.new([3])
     expect(antipodes.division_by_two).to eq [3]
   end
+
+  it 'returns correct result if array has 9 elements' do
+    antipodes = Tools::Antipodes.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
+    expect(antipodes.division_by_two).to eq [5, 5]
+  end
 end
