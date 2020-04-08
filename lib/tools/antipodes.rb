@@ -5,7 +5,9 @@ module Tools
       @half = @antipodes.length / 2
     end
 
-    def division_by_two
+    def antipodes_res
+      return @antipodes if @antipodes.length < 2
+
       (0..@half - 1).map { |i| (left[i] + right[i]) / 2.0 }
     end
 
