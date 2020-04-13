@@ -1,5 +1,3 @@
-require "tools/version"
-
 module Tools
   class Luhn
     def initialize(str)

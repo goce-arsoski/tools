@@ -1,23 +1,26 @@
-module Tools
-  class Antipodes
-    attr_reader :array, :half
-    def initialize(array)
-      @array = array
-      @half = @array.length / 2
-    end
+RSpec.describe Tools::Antipodes do
+  it 'returns correct result for array with even length' do
+    antipodes = Tools::Antipodes.new([1, 2, 3, 4])
+    expect(antipodes.antipodes_result).to eq [2.5, 2.5]
+  end
 
-    def antipodes_result
-      array.length < 2 ? array : (0..half - 1).map { |i| (left[i] + right[i]) / 2.0 }
-    end
+  it 'returns correct result if array has odd length' do
+    antipodes = Tools::Antipodes.new([1, 2, 3, 4, 5])
+    expect(antipodes.antipodes_result).to eq [3, 3]
+  end
 
-    private
+  it 'returns correct result for array with negative numbers' do
+    antipodes = Tools::Antipodes.new([-1, -2])
+    expect(antipodes.antipodes_result).to eq [-1.5]
+  end
 
-    def left
-      array.first(half)
-    end
+  it 'returns input array if contain less then two elements' do
+    antipodes = Tools::Antipodes.new([3])
+    expect(antipodes.antipodes_result).to eq [3]
+  end
 
-    def right
-      array.last(half).reverse
-    end
+  it 'returns correct result if array has 9 elements' do
+    antipodes = Tools::Antipodes.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
+    expect(antipodes.antipodes_result).to eq [5, 5, 5, 5]
   end
 end
