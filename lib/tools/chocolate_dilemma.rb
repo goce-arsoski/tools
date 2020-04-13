@@ -13,7 +13,7 @@ module Tools
 
     def total(person)
       total = 0
-      (0..person.length - 1).map { |i| total += person[i].reduce(:*) }
+      (0..person.length - 1).each { |i| total += person[i].reduce(:*) }
       total
     end
   end
