@@ -16,6 +16,5 @@ module Tools
       (0..person.length - 1).each { |i| total += person[i].reduce(:*) }
       total
     end
-    
   end
 end
