@@ -8,4 +8,5 @@ RSpec.describe Tools::ChocolateDilemma do
     nestle = Tools::ChocolateDilemma.new([[4, 3], [2, 1]], [[1, 2], [3, 4]])
     expect(nestle.fairness?).to be true
   end
+  
 end
