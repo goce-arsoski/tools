@@ -3,7 +3,7 @@ module Tools
     attr_reader :array, :half
     def initialize(array)
       @array = array
-      @half = @array.length / 2
+      @half = array.length / 2
     end
 
     def antipodes_result
