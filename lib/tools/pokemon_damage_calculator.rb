@@ -2,7 +2,7 @@ module Tools
   class PokemonDamageCalculator
     SUPER_EFFECTIVE = 2
     NEUTRAL = 1
-    NOT_VERY_EFECTIVE = 0.5
+    NOT_VERY_EFFECTIVE = 0.5
 
     def initialize(attack_type, defense_type, attack, defense)
       @attack_type = attack_type
@@ -30,9 +30,9 @@ module Tools
     def fire(fire)
       case fire
       when 'fire'
-        NOT_VERY_EFECTIVE
+        NOT_VERY_EFFECTIVE
       when 'water'
-        NOT_VERY_EFECTIVE
+        NOT_VERY_EFFECTIVE
       when 'electric'
         NEUTRAL
       when 'grass'
@@ -45,11 +45,11 @@ module Tools
       when 'fire'
         SUPER_EFFECTIVE
       when 'water'
-        NOT_VERY_EFECTIVE
+        NOT_VERY_EFFECTIVE
       when 'electric'
-        NOT_VERY_EFECTIVE
+        NOT_VERY_EFFECTIVE
       when 'grass'
-        NOT_VERY_EFECTIVE
+        NOT_VERY_EFFECTIVE
       end
     end
 
@@ -60,7 +60,7 @@ module Tools
       when 'water'
         SUPER_EFFECTIVE
       when 'electric'
-        NOT_VERY_EFECTIVE
+        NOT_VERY_EFFECTIVE
       when 'grass'
         NEUTRAL
       end
@@ -69,13 +69,13 @@ module Tools
     def grass(grass)
       case grass
       when 'fire'
-        NOT_VERY_EFECTIVE
+        NOT_VERY_EFFECTIVE
       when 'water'
         SUPER_EFFECTIVE
       when 'electric'
         NEUTRAL
       when 'grass'
-        NOT_VERY_EFECTIVE
+        NOT_VERY_EFFECTIVE
       end
     end
   end
