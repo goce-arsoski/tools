@@ -27,8 +27,7 @@ module Tools
 
     private
 
-    def fire(type)
-      fire = type
+    def fire(fire)
       case fire
       when 'fire'
         NOT_VERY_EFECTIVE
@@ -41,8 +40,7 @@ module Tools
       end
     end
 
-    def water(type)
-      water = type
+    def water(water)
       case water
       when 'fire'
         SUPER_EFFECTIVE
@@ -55,8 +53,7 @@ module Tools
       end
     end
 
-    def electric(type)
-      electric = type
+    def electric(electric)
       case electric
       when 'fire'
         NEUTRAL
@@ -69,8 +66,7 @@ module Tools
       end
     end
 
-    def grass(type)
-      grass = type
+    def grass(grass)
       case grass
       when 'fire'
         NOT_VERY_EFECTIVE
