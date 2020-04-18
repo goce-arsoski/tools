@@ -29,58 +29,58 @@ module Tools
 
     def fire(type)
       fire = type
-      @effectiveness = case fire
-                      when 'fire'
-                        NOT_VERY_EFECTIVE
-                      when 'water'
-                        NOT_VERY_EFECTIVE
-                      when 'electric'
-                        NEUTRAL
-                      when 'grass'
-                        SUPER_EFFECTIVE
-                      end
+      @effectiveness =  case fire
+                        when 'fire'
+                          NOT_VERY_EFECTIVE
+                        when 'water'
+                          NOT_VERY_EFECTIVE
+                        when 'electric'
+                          NEUTRAL
+                        when 'grass'
+                          SUPER_EFFECTIVE
+                        end
     end
 
     def water(type)
       water = type
-      @effectiveness = case water
-                      when 'fire'
-                        SUPER_EFFECTIVE
-                      when 'water'
-                        NOT_VERY_EFECTIVE
-                      when 'electric'
-                        NOT_VERY_EFECTIVE
-                      when 'grass'
-                        NOT_VERY_EFECTIVE
-                      end
+      @effectiveness =  case water
+                        when 'fire'
+                          SUPER_EFFECTIVE
+                        when 'water'
+                          NOT_VERY_EFECTIVE
+                        when 'electric'
+                          NOT_VERY_EFECTIVE
+                        when 'grass'
+                          NOT_VERY_EFECTIVE
+                        end
     end
 
     def electric(type)
       electric = type
-      @effectiveness = case electric
-                      when 'fire'
-                        NEUTRAL
-                      when 'water'
-                        SUPER_EFFECTIVE
-                      when 'electric'
-                        NOT_VERY_EFECTIVE
-                      when 'grass'
-                        NEUTRAL
-                      end
+      @effectiveness =  case electric
+                        when 'fire'
+                          NEUTRAL
+                        when 'water'
+                          SUPER_EFFECTIVE
+                        when 'electric'
+                          NOT_VERY_EFECTIVE
+                        when 'grass'
+                          NEUTRAL
+                        end
     end
 
     def grass(type)
       grass = type
-      @effectiveness = case grass
-                      when 'fire'
-                        NOT_VERY_EFECTIVE
-                      when 'water'
-                        SUPER_EFFECTIVE
-                      when 'electric'
-                        NEUTRAL
-                      when 'grass'
-                        NOT_VERY_EFECTIVE
-                      end
+      @effectiveness =  case grass
+                        when 'fire'
+                          NOT_VERY_EFECTIVE
+                        when 'water'
+                          SUPER_EFFECTIVE
+                        when 'electric'
+                          NEUTRAL
+                        when 'grass'
+                          NOT_VERY_EFECTIVE
+                        end
     end
   end
 end
