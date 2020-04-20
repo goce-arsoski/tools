@@ -8,38 +8,29 @@ module Tools
     end
 
     def adjust
-      seconds = sec
-      minutes = min
-      hours = hrs
-      hours + ':' + minutes + ':' + seconds
+      '%02d' % hrs + ':' + '%02d' % min + ':' + '%02d' % sec
     end
 
     private
 
-    def hrs
-      hrs = @input_hrs.to_i + @min_to_hrs + @hrs
-      hrs -= 24 while hrs >= 24
-      hrs < 10 ? '0' + hrs.to_s : hrs.to_s
+    def sec
+      (@input_sec.to_i + @sec) % 60
+    end
+
+    def sec_to_min
+      (@input_sec.to_i + @sec) / 60
     end
 
     def min
-      min = @input_min.to_i + @sec_to_min + @min
-      @min_to_hrs = 0
-      while min >= 60
-        min -= 60
-        @min_to_hrs += 1
-      end
-      min < 10 ? '0' + min.to_s : min.to_s
+      (@input_min.to_i + sec_to_min + @min) % 60
     end
 
-    def sec
-      sec = @input_sec.to_i + @sec
-      @sec_to_min = 0
-      while sec >= 60
-        sec -= 60
-        @sec_to_min += 1
-      end
-      sec < 10 ? '0' + sec.to_s : sec.to_s
+    def min_to_hrs
+      (@input_min.to_i + sec_to_min + @min) / 60
+    end
+
+    def hrs
+      (@input_hrs.to_i + min_to_hrs + @hrs) % 24
     end
   end
 end
